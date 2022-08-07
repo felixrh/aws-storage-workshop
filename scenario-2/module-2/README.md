@@ -8,15 +8,15 @@ In this module, you’ll deploy AWS storage gateway in file mode in the same net
 
 ![scenario 2 diagram 3](../../images/scenario-2-diagram-3.png)
 
-The EC2 instance in eu-west-1 is to simulate the physical server in on-premises data center and a storage gateway is deployed on another EC2 instance to act as an on-premises file storage gateway.
+The Linux EC2 instance created in Module-1 is to simulate the physical server in on-premises data center and a storage gateway is deployed on another EC2 instance to act as an on-premises file storage gateway.
 
-The Linux EC2 instance use NFS mount to connect to the file gateway.  Media files are copied to file server, which actually store all files in AWS S3 bucket in the other region. The cross region replication and lifecycle policy configured in module 1 will also be applied to the new S3 data.
+The Linux EC2 instance use NFS mount to connect to the file gateway.  Media files are copied to file server, which actually store all files in AWS S3 bucket. Optionally, you can configure a cross region replication and lifecycle policy.
 
 ## Implementation Instructions
 
-### 1. Deploy Storage Gateway using CloudFormation Template
+### 1. Deploy Storage Gateway Instance (on standby) using CloudFormation Template
 
-In order to give our Linux instance access to S3 over NFS, we first need to deploy a storage gateway in the same region as the Linux instance. To do this you can use the CloudFormation template below.
+In order to give our Linux instance access to S3 over NFS, we first need to deploy a storage gateway in the same region as the Linux instance. To do this, you can use the CloudFormation template below to kickstart the initial instance creation process. You will be setting up the rest of storage gateway configuration to get familiarize with the functionality and its environment.
 
 <details>
 <summary><strong>CloudFormation Launch Instructions (expand for details)</strong></summary><p>
@@ -25,32 +25,87 @@ In order to give our Linux instance access to S3 over NFS, we first need to depl
 
 Region| Launch
 ------|-----
-EU (Ireland) | [![Launch Module 1 in eu-west-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=storage-workshop-2b&templateURL=https://specialist-cloudformation-templates.s3-us-west-1.amazonaws.com/pl/reinvent2017/scenario2-step2-migrate-FGW1-(eu-west-1).json)
+Asia Pacific (Singapore) | [![Launch Module 2 in ap-southeast-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-1#/stacks/new?stackName=storage-workshop-2b&templateURL=https://felixcfn.s3.eu-west-1.amazonaws.com/scenario2-step2-migrate-FGW1-FR.json)
 
 2.  Click **Next** on the Select Template page.
-3.	Select the VPC and subnet where the Linux instance was created in module 1
+3.	Select the VPC and subnet where the Linux instance was created in Module-1
 4.	Select the security group that start with "storage-workshop-2a-linux1SecurityGroup" (This will allow the Linux instance network access to the storage gateway instance)
 5.	Click **Next**.
+  
+  ![scenario-2-module-2-cf-options](../../images/scenario-2-module-2-cf-options.png)
 
-![scenario-2-module-2-cf-options](../../images/scenario-2-module-2-cf-options.png)
+6.	Click **Next** Again. (skipping "Configure stack options" section, leaving all configuration in this section as default)
 
-6.	Click **Next** Again. (skipping IAM advanced section)
-7.	On the Review page, check the box to acknowledge that CloudFormation will create IAM resources and click **Create**.
+  ![scenario2-module2-002](../../images/scenario2-module2-002.png)
+  
+7.	On the Review page, check the box to acknowledge that CloudFormation will create IAM resources and click **Create Stack**.
 
+  ![scenario2-module2-ack](../../images/scenario2-module2-ack.png)
+  
 Once the CloudFormation stack shows a status of CREATE_COMPLETE, you are ready to move on to the next step2
 
-Note: it may take some time for the gateway to activate. You can see the activation status of the gateway in the Name of the EC2 instance in eu-west-1
+Note: it may take some time for the gateway to activate. You can see the activation status of the gateway in the Name of the EC2 instance in ap-southeast-1
 
 </p></details>
 
-### 2. Configure storage Gateway in eu-central-1 region
+### 2. Configure storage Gateway in ap-southeast-1 region
 
-From the AWS Management Console, select **Storage Gateway** from within services and select EU (Frankfurt) as the region.  You should see a storage gateway already created and activated in previous step.
+From the AWS Management Console, select **Storage Gateway** from within services and select Asia Pacific (Singapore) as the region. You should see a storage gateway console where you will create the service.
 
 <details>
 <summary><strong>(expand for screenshot)</strong></summary><p>
 
-![scenario-2-module-2-Picture2](../../images/scenario-2-module-2-Picture2.png)
+![scenario2-module2-fgw1](../../images/scenario2-module2-fgw1.png)
+1. From Storage Gateway console, choose **Gateway** from left sidebar, then click on **Create gateway**
+  
+  ![scenario2-module2-fgw2](../../images/scenario2-module2-fgw2.png)
+  
+2. **Set up Gateway** - choose desirable Gateway name.
+  
+  pic
+  
+3. **Gateway options** - Choose Amazon S3 File Gateway as you want to deploy the Storage Gateway as the core backup service.
+  
+  pic
+
+4. **Platform options** - choose **Amazon EC2** as the platform of choice, functioning as the file gateway instance.
+  In this case, we have created the EC2 instance from the CloudFormation template to simulate the storage gateway to be running on Amazon EC2. in actual production environment, you have the option to deploy this from VMware ESXi, Microsoft Hyper-V, Linux KVM, or hardware appliance, based on your actual requirements and objective.
+  
+5. Acknowledge the steps information that you are able to access the EC2 instance, then click on **Next**
+  
+  pic
+
+6. **Connect to AWS** - Choose **Publicly accessible** as the service endpoint type, as we want to access it in the closed-lab environment. In actual production environment, you have the option to use VPC hosted service endpoint as the choice. 
+  
+  **Gateway connection options** - choose IP address as the connection options, since we need to access the storage gateway in this environment from the public IP. In actual production environment, you have the option to connect using activation key which can be retrieved by accessing the private IP address.
+  
+  Enter the public IP address of File Gateway instance. This can be retrieved from the EC2 console under Details section.
+  
+  Click on **Next** once done entering.
+  
+  pic
+  
+7. **Review and Activate** - Storage Gateway will now attempt to establish connection to the assigned EC2 instance. Review the information captured, and then click **Next**
+  
+  pic
+
+8. At this point, storage gateway will proceed with detecting and configuring cache storage. The recommended minimum capacity for cache is 150 GiB, as indicated. Allocate this storage as **Cache** from the dropdown box.
+  
+  Choose *Create a new log group* under **CloudWatch log group** configuration section.
+  Under CloudWatch alarms, choose as **Deactivated alarm**.
+  
+  Review the config, then click **Configure**
+  
+  pic
+  
+  Back to the Storage Gateway console, File Storage Gateway is now created and running.
+  
+  pic
+
+
+  
+
+  
 </p></details>
 
 ### 3. Create a file share connected to your primary S3 bucket
