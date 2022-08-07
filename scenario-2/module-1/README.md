@@ -1,4 +1,4 @@
-# Deploy Linux Instance & configure S3 Storage Solution with CRR and Lifecycle Policy
+# Deploy Linux Instance & configure S3 Storage as Storage Backup Target
 
 ## Introduction
 
