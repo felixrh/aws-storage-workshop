@@ -112,21 +112,45 @@ A file share can be created on the storage gateway to be used by NFS client. The
 <details>
 <summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
 
-1.	Select the gateway named "Hybrid-Workshop-File-Gateway-Server-1..." then click **Create file share**.
-2.	In the Create file share wizard, select the storage gateway that is created, input the name of the first S3 bucket we created in first module, and select Create a new IAM role. Then click **Next**.
+-	Select the gateway you created earlier, then click **Create file share**.
+  
+  ![fs1](../../images/fs1.png)
 
-![scenario-2-module-2-Picture3](../../images/scenario-2-module-2-Picture3.png)
+-	Select the gateway that you created earlier from dropdown box, choose “S3 bucket name” as the Amazon S3 location. Then, fill in Amazon S3 bucket name field with the S3 bucket name that you created earlier (leave optional S3 prefix empty for now).
 
-3.	Choose Next to review configuration settings. (Note: Leaving the defaults in this lab scenario is fine however, in real deployments consider limiting access by IP.)
+- Choose AWS region as **Asia Pacific (Singapore) ap-southeast-1“ from the dropdown box.
 
-![scenario-2-module-2-Picture4](../../images/scenario-2-module-2-Picture4.png)
+- Under *File share name*, leave as default.
 
-4.	Review your file share configuration settings, and then click **Create file share**. After your file share is created, you can select the share see your file share settings in the file share Details pane at the bottom of the console.
+  ![fs2](../../images/fs2.png)
+
+- Leave rest of configuration section as default - *untick* Private Link for S3, Access Objects with *NFS*, *Deactivate logging* for Audit logs, *None* for automated cache refresh from S3, *None* for File upload notification
+
+  ![fs3](../../images/fs3.png)
+
+- On Amazon S3 storage settings, keep as default, then click *Next*
+  
+  ![fs4](../../images/fs4.png)
+  
+- In *File access settings* - enter ‘0.0.0.0/0’ as the Allowed clients, remember this is good only for the workshop duration. In actual production environment, you need to specify the object addresses.
+  
+  ![fs5](../../images/fs5.png)
+  
+- Keep the rest settings as default, then click on *Next*
+  
+  ![fs6](../../images/fs6.png)
+  
+- Review config, then click on *Next*
+- Validate File Shares have been created, as below illustrated from console.
+  
+  ![fs7](../../images/fs7.png)
+  
+After your file share is created, you can select the share see your file share settings in the file share Details pane at the bottom of the console.
 </p></details>
 
 ### 4. Mount the bucket over NFS on your Linux instance
 
-At this point you can mount the file share on the Linux NFS client and gain access to the associated S3 bucket.
+At this point, you can mount the file share on the Linux NFS client and gain access to the associated S3 bucket.
 
 <details>
 <summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
@@ -183,34 +207,23 @@ cp -v *.jpg /mnt/nfs/s3/
 <details>
 <summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
 
-1. In the Amazon S3 management console, navigate to your primary bucket and check to see that the 200 images files are stored as objects within.
+- In the Amazon S3 management console, navigate to your primary bucket and check to see that the 200 images files are stored as objects within.
 
-![scenario-2-module-2-Picture5](../../images/scenario-2-module-2-Picture6.png)
-</p></details>
-
-### 2. Verify S3 cross region replication is replicating objects to the secondary S3 bucket in eu-west-2.
-
-<details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
-
-1. In  the Amazon S3 management console, view the content under S3 replica bucket. It should display the same 200 JPEG files in the region of EU (London).
-
-![scenario-2-module-2-Picture7](../../images/scenario-2-module-2-Picture7.png)
-
+![fs8](../../images/fs8.png)
 </p></details>
 
 ## Scenario complete
 
-Congratulation you have completed the second scenario. In this workshop you successfully copied data from an nfs client in eu-west-1 to a primary S3 bucket in eu-central-1. Additionally, objects written in the primary bucket were replicated to a secondary bucket in eu-west-2. These objects will be life cycled to glacier after 30 days and in the real world might be kept to safeguard against accidental deletions that may occur the the primary objects in the primary S3 bucket.
+Congratulation you have completed the second scenario. In this workshop you successfully copied data from an nfs client to a primary S3 bucket in ap-southeast-1. Additionally, objects written in the primary bucket have the option to be replicated to a secondary bucket (for example: other region). These objects can also be be life cycled to glacier after 30 days and in the real world might be kept to safeguard against accidental deletions that may occur the the primary objects in the primary S3 bucket.
 
 ## Workshop Cleanup
 
 To make sure all resources are deleted after this workshop scenario make sure you execute the follow steps in the order outlined below:
 
-1. Delete the AWS file gateway from the storage gateway console in Frankfurt (eu-central-1)
-2. Delete the buckets in Frankfurt (eu-central-1) and London (eu-west-2)
-3. Destroy the cloud formation stack in Ireland (eu-west-1) named "storage-workshop-2b" (wait for it to complete before deleting the next one)
-4. Destroy the cloud formation stack in Ireland (eu-west-1) named "storage-workshop-2a"
+1. Delete the AWS file gateway from the storage gateway console
+2. Delete the buckets
+3. Destroy the cloud formation stack "storage-workshop-2b" (wait for it to complete before deleting the next one)
+4. Destroy the cloud formation stack "storage-workshop-2a"
 
 ## License
 
