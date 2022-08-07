@@ -56,24 +56,24 @@ From the AWS Management Console, select **Storage Gateway** from within services
 <summary><strong>(expand for screenshot)</strong></summary><p>
 
 ![scenario2-module2-fgw1](../../images/scenario2-module2-fgw1.png)
-1. From Storage Gateway console, choose **Gateway** from left sidebar, then click on **Create gateway**
+- From Storage Gateway console, choose **Gateway** from left sidebar, then click on **Create gateway**
   
   ![scenario2-module2-fgw2](../../images/scenario2-module2-fgw2.png)
   
-2. **Set up Gateway** - choose desirable Gateway name.
+- **Set up Gateway** - choose desirable Gateway name.
   
-  pic
+  ![scenario2-module2-fgw-1-create1](../../images/scenario2-module2-fgw-1-create1.png)
   
-3. **Gateway options** - Choose Amazon S3 File Gateway as you want to deploy the Storage Gateway as the core backup service.
+- **Gateway options** - Choose Amazon S3 File Gateway as you want to deploy the Storage Gateway as the core backup service.
   
-  pic
+  ![scenario2-module2-fgw-1-gwoptions](../../images/scenario2-module2-fgw-1-gwoptions.png)
 
-4. **Platform options** - choose **Amazon EC2** as the platform of choice, functioning as the file gateway instance.
+- **Platform options** - choose **Amazon EC2** as the platform of choice, functioning as the file geiifccuhckateway instance.
   In this case, we have created the EC2 instance from the CloudFormation template to simulate the storage gateway to be running on Amazon EC2. in actual production environment, you have the option to deploy this from VMware ESXi, Microsoft Hyper-V, Linux KVM, or hardware appliance, based on your actual requirements and objective.
   
-5. Acknowledge the steps information that you are able to access the EC2 instance, then click on **Next**
+- Acknowledge the steps information that you are able to access the EC2 instance, then click on **Next**
   
-  pic
+  ![scenario2-module2-fgw-1-ack](../../images/scenario2-module2-fgw-1-ack.png)
 
 6. **Connect to AWS** - Choose **Publicly accessible** as the service endpoint type, as we want to access it in the closed-lab environment. In actual production environment, you have the option to use VPC hosted service endpoint as the choice. 
   
@@ -83,28 +83,26 @@ From the AWS Management Console, select **Storage Gateway** from within services
   
   Click on **Next** once done entering.
   
-  pic
+  ![scenario2-module2-fgw-2-connect](../../images/scenario2-module2-fgw-2-connect.png)
   
 7. **Review and Activate** - Storage Gateway will now attempt to establish connection to the assigned EC2 instance. Review the information captured, and then click **Next**
   
-  pic
+  ![scenario2-module2-fgw-3-activate](../../images/scenario2-module2-fgw-3-activate.png)
 
 8. At this point, storage gateway will proceed with detecting and configuring cache storage. The recommended minimum capacity for cache is 150 GiB, as indicated. Allocate this storage as **Cache** from the dropdown box.
   
   Choose *Create a new log group* under **CloudWatch log group** configuration section.
-  Under CloudWatch alarms, choose as **Deactivated alarm**.
+
+  ![scenario2-module2-fgw-4-config1](../../images/scenario2-module2-fgw-4-config1.png)
   
+  Under CloudWatch alarms, choose as **Deactivated alarm**.
   Review the config, then click **Configure**
   
-  pic
+  ![scenario2-module2-fgw-4-config2](../../images/scenario2-module2-fgw-4-config2.png)
   
   Back to the Storage Gateway console, File Storage Gateway is now created and running.
   
-  pic
-
-
-  
-
+  ![scenario2-module2-fgw-running](../../images/scenario2-module2-fgw-running.png)
   
 </p></details>
 
