@@ -13,14 +13,15 @@ Resources consumed as part of this workshop will have a cost and it is recommend
 * **Browser** - We recommend that you use the latest version of Firefox or Chrome for this workshop.
 * **SSH Client** -You will need an ssh client to access EC2 instances
 * **AWS CLI** – You will need the aws cli installed on you client to access S3 objects
-* **Key Pair** – You will need a valid eu-west-1 EC2 Key Pair. For more information on generating and downloading an EC2 Key Pair please visit [creating a key pair using amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)
+* **Key Pair** – You will need a valid EC2 Key Pair from the respective region. For the workshop, we have assigned the keypair for you. For more information on generating and downloading an EC2 Key Pair please visit [creating a key pair using amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)
 
 ## Workshop Modules ###
 
 This scenario is broken into 2 modules:
 
-* **Module 1** - [Deploy Linux Instance & configure S3 Storage Solution with CRR and Lifecycle Policy](module-1/README.md)
+* **Module 1** - [Deploy source instance & configure S3 as Target Backup Storage Solution](module-1/README.md)
 * **Module 2** - [Deploy Storage Gateway in File mode and integrate with S3](module-2/README.md)
+* **Optional Quest** - [Configure S3 Storage Solution with Cross-Region Replication and Lifecycle Policy]
 
 ## License
 
