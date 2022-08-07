@@ -118,35 +118,36 @@ A file share can be created on the storage gateway to be used by NFS client. The
 
 -	Select the gateway that you created earlier from dropdown box, choose “S3 bucket name” as the Amazon S3 location. Then, fill in Amazon S3 bucket name field with the S3 bucket name that you created earlier (leave optional S3 prefix empty for now).
 
-- Choose AWS region as **Asia Pacific (Singapore) ap-southeast-1“ from the dropdown box.
+- Choose AWS region as **Asia Pacific (Singapore) ap-southeast-1** from the dropdown box.
 
-- Under *File share name*, leave as default.
+- Under **File share name**, leave as default.
 
   ![fs2](../../images/fs2.png)
 
-- Leave rest of configuration section as default - *untick* Private Link for S3, Access Objects with *NFS*, *Deactivate logging* for Audit logs, *None* for automated cache refresh from S3, *None* for File upload notification
+- Leave rest of configuration section as default - **untick** Private Link for S3, Access Objects with **NFS**, **Deactivate logging** for Audit logs, **None** for automated cache refresh from S3, **None** for File upload notification
 
   ![fs3](../../images/fs3.png)
 
-- On Amazon S3 storage settings, keep as default, then click *Next*
+- On Amazon S3 storage settings, keep as default, then click **Next**
   
   ![fs4](../../images/fs4.png)
   
-- In *File access settings* - enter ‘0.0.0.0/0’ as the Allowed clients, remember this is good only for the workshop duration. In actual production environment, you need to specify the object addresses.
+- In *File access settings* - enter **0.0.0.0/0** as the *Allowed clients*, remember this is good only for the workshop duration. In actual production environment, you need to specify the object addresses.
   
   ![fs5](../../images/fs5.png)
   
-- Keep the rest settings as default, then click on *Next*
+- Keep the rest settings as default, then click on **Next**
   
   ![fs6](../../images/fs6.png)
   
-- Review config, then click on *Next*
+- Review config, then click on **Next**
 - Validate File Shares have been created, as below illustrated from console.
   
   ![fs7](../../images/fs7.png)
   
 After your file share is created, you can select the share see your file share settings in the file share Details pane at the bottom of the console.
 </p></details>
+
 
 ### 4. Mount the bucket over NFS on your Linux instance
 
@@ -156,7 +157,7 @@ At this point, you can mount the file share on the Linux NFS client and gain acc
 <summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
 
 1.	SSH into the Linux Instance created in module 1
-2.	Create the directory that will contain the NSF shared files
+2.	Create the directory that will contain the NFS shared files
 
 `sudo mkdir -p /mnt/nfs/s3`
 
