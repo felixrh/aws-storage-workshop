@@ -59,6 +59,7 @@ SSH into the Linux instance that is just created, and list the files under /medi
 2. Connect to the above Linux Instance. For detailed instruction, please refer to [Connecting to Your Linux Instance Using SSH](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)
 3. In the Linux OS, type `cd /media/data`
 4. Type `ls –l`, you should see 200 image files, which make up our sample data
+  ![scenario2-module1-001](../../images/scenario2-module1-001.png)
 </p></details>
 
 ### 3. Create first S3 buckets in ap-southeast-1 (Singapore)
@@ -70,11 +71,13 @@ Use the AWS console to create your primary S3 bucket located ap-southeast-1 (Sin
 1. Change the AWS console region to ap-southeast-1 (Singapore), by selecting **Asia Pacific (Singapore) ap-southeast-1** from the region list in the top right corner of the console.
 2. In the AWS Management Console select **Services** then select **S3** under Storage.
 3. Select **Create Bucket**
-4. Provide a globally unique name for your bucket such as my-storage-workshop-bucket1.
+4. Provide a globally unique name for your bucket such as my-storage-workshop-bucket1-NAME.
 5. Select the Region to **Asia Pacific (Singapore) ap-southeast-1**
-6. Choose **Create** in the lower left of the dialog as a shortcut to create the bucket without advanced options.
-
-![scenario-2-module-1-Picture3](../../images/scenario-2-module-1-Picture3.png)
+6. Leave the rest of configuration as default (Object Ownership, Block Public Access, Bucket Versioning, Default Encryption)
+  ![scenario2-module1-002](../../images/scenario2-module1-002.png)
+  ![scenario2-module1-003](../../images/scenario2-module1-003.png)
+  ![scenario2-module1-004](../../images/scenario2-module1-004.png)
+7. Choose **Create** in the lower left of the dialog as a shortcut to create the bucket without advanced options.
 
 </p></details>
 
