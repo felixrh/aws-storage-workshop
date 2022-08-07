@@ -52,10 +52,11 @@ Note: it may take some time for the gateway to activate. You can see the activat
 
 From the AWS Management Console, select **Storage Gateway** from within services and select Asia Pacific (Singapore) as the region. You should see a storage gateway console where you will create the service.
 
-<details>
-<summary><strong>(expand for screenshot)</strong></summary><p>
-
 ![scenario2-module2-fgw1](../../images/scenario2-module2-fgw1.png)
+
+<details>
+<summary><strong>Step-by-Step Instructions</strong></summary><p>
+
 - From Storage Gateway console, choose **Gateway** from left sidebar, then click on **Create gateway**
   
   ![scenario2-module2-fgw2](../../images/scenario2-module2-fgw2.png)
@@ -75,21 +76,19 @@ From the AWS Management Console, select **Storage Gateway** from within services
   
   ![scenario2-module2-fgw-1-ack](../../images/scenario2-module2-fgw-1-ack.png)
 
-6. **Connect to AWS** - Choose **Publicly accessible** as the service endpoint type, as we want to access it in the closed-lab environment. In actual production environment, you have the option to use VPC hosted service endpoint as the choice. 
+- **Connect to AWS** - Choose **Publicly accessible** as the service endpoint type, as we want to access it in the closed-lab environment. In actual production environment, you have the option to use VPC hosted service endpoint as the choice. 
   
-  **Gateway connection options** - choose IP address as the connection options, since we need to access the storage gateway in this environment from the public IP. In actual production environment, you have the option to connect using activation key which can be retrieved by accessing the private IP address.
+- **Gateway connection options** - choose IP address as the connection options, since we need to access the storage gateway in this environment from the public IP. In actual production environment, you have the option to connect using activation key which can be retrieved by accessing the private IP address.
   
-  Enter the public IP address of File Gateway instance. This can be retrieved from the EC2 console under Details section.
-  
-  Click on **Next** once done entering.
+- Enter the public IP address of File Gateway instance. This can be retrieved from the EC2 console under Details section. Click on **Next** once done entering.
   
   ![scenario2-module2-fgw-2-connect](../../images/scenario2-module2-fgw-2-connect.png)
   
-7. **Review and Activate** - Storage Gateway will now attempt to establish connection to the assigned EC2 instance. Review the information captured, and then click **Next**
+- **Review and Activate** - Storage Gateway will now attempt to establish connection to the assigned EC2 instance. Review the information captured, and then click **Next**
   
   ![scenario2-module2-fgw-3-activate](../../images/scenario2-module2-fgw-3-activate.png)
 
-8. At this point, storage gateway will proceed with detecting and configuring cache storage. The recommended minimum capacity for cache is 150 GiB, as indicated. Allocate this storage as **Cache** from the dropdown box.
+- At this point, storage gateway will proceed with detecting and configuring cache storage. The recommended minimum capacity for cache is 150 GiB, as indicated. Allocate this storage as **Cache** from the dropdown box.
   
   Choose *Create a new log group* under **CloudWatch log group** configuration section.
 
