@@ -76,7 +76,7 @@ Use the AWS console to create your primary S3 bucket located ap-southeast-1 (Sin
 4. Provide a globally unique name for your bucket such as my-storage-workshop-bucket1-NAME.
 5. Select the Region to **Asia Pacific (Singapore) ap-southeast-1**
 6. Leave the rest of configuration as default (Object Ownership, Block Public Access, Bucket Versioning, Default Encryption)
-  ![scenario2-module1-002](../../images/scenario2-module1-002.png)
+  ![s2-m1-2](../../images/s2-m1-2.png)
   ![scenario2-module1-003](../../images/scenario2-module1-003.png)
   ![scenario2-module1-004](../../images/scenario2-module1-004.png)
 7. Choose **Create** in the lower left of the dialog as a shortcut to create the bucket without advanced options.
