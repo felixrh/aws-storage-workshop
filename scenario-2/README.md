@@ -21,7 +21,7 @@ This scenario is broken into 2 modules:
 
 * **Module 1** - [Deploy source instance & configure S3 as Target Backup Storage Solution](module-1/README.md)
 * **Module 2** - [Deploy Storage Gateway in File mode and integrate with S3](module-2/README.md)
-* **Optional Quest** - [Configure S3 Storage Solution with Cross-Region Replication and Lifecycle Policy]
+* **Module 3 (Optional)** - [Configure S3 Storage Solution with Cross-Region Replication and Lifecycle Policy](module-3/README.md)
 
 ## License
 
