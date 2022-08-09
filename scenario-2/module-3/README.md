@@ -61,7 +61,7 @@ Note: **Enable Versioning** on the bucket when asked, leave the KMS encryption u
 
 </p></details>
 
-### 3. Setup S3 Lifecycle Policy on S3 secondary bucket
+### Step 3. Setup S3 Lifecycle Policy on S3 secondary bucket
 Use the AWS Management Console to create a new lifecycle policy on S3 secondary bucket to transition and move old data to Glacier.
 <details>
 <summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
@@ -93,10 +93,4 @@ Review the transition and expiration actions, then click on **Create rule** butt
 - Select the S3 secondary bucket created in Step 1 after a few minutes.  Click the refresh button, you should see the same file replicated to the second bucket.
 
 ### Verify S3 Cross Region Replication is replicating objects to the secondary S3 bucket
-
-<details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
-
 - In  the Amazon S3 management console, view the content under S3 replica bucket. It should display the same 200 JPEG files in the region of Asia Pacific (Sydney).
-
-</p></details>
