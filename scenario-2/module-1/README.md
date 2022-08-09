@@ -20,9 +20,9 @@ In addition, S3 lifecycle policy will be created to change the data older than 3
 
 ### 1.	Deploy Linux Instance using CloudFormation Template
 
-The first step is to deploy an EC2 instance with some data in eu-west-1 to simulate a Linux server running in a non-AWS location.
+The first step is to deploy an EC2 instance with some data in ap-southeast-1 to simulate a Linux server running in a non-AWS location.
 
-You can launch a customized instance using the following AWS CloudFormation template in the eu-west-1. The template will launch an instance, download a sample dataset to the instance and setup a security group for ssh access.
+You can launch a customized instance using the following AWS CloudFormation template in the ap-southeast-1. The template will launch an instance, download a sample dataset to the instance and setup a security group for ssh access.
 
 <details>
 <summary><strong>CloudFormation Launch Instructions (expand for details)</strong></summary><p>
