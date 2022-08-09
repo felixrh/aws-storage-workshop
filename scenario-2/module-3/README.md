@@ -1,7 +1,7 @@
 # Configure S3 Storage with Cross-Region Replication and Lifecycle Policy
 
-### 1. Create secondary S3 bucket in London (eu-west-2)
-Use the AWS console to create a secondary S3 bucket in a tertiary region (eu-west-2)
+### Step 1. Create secondary S3 bucket in Sydney (ap-southeast-2)
+Use the AWS console to create a secondary S3 bucket in a secondary region (ap-southeast-2)
 <details>
 <summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
 
@@ -9,30 +9,51 @@ Use the AWS console to create a secondary S3 bucket in a tertiary region (eu-wes
 - Select **+Create Bucket**
 - Provide a globally unique name for your bucket such as my-storage-workshop-bucket2.
 - Select the Region to Asia Pacific (Sydney)
-- Choose **Create** in the lower left of the dialog.
+- **Object Ownership** - Choose ACLs disabled
+![m3-1](../../images/m3-1.png)
 
-![scenario-2-module-1-Picture4](../../images/scenario-2-module-1-Picture4.png)
-pic
+- **Block Public Access settings for this bucket** - tick *Block all public access*
+- **Bucket Versioning** - Choose Disable
+![m3-2](../../images/m3-2.png)
+
+- **Default encryption** - Choose Disable
+- Review your selection again, then Click on **Create bucket** button in the bottom of the dialog.
+![m3-3](../../images/m3-3.png)
 
 </p></details>
 
-### 2. Setup Cross-region Replication from S3 Primary bucket to the secondary S3 bucket
+### Step 2. Setup Cross-region Replication from S3 Primary bucket to the secondary S3 bucket
 Use the AWS console to enable cross-region replication on S3 primary bucket to S3 secondary bucket in another region.
 <details>
 <summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
 
 - In AWS Management Console, S3 service, all the buckets are listed. Click the name of the S3 bucket you created in Step 3.
-- Click Management Tab, and click Replication
-- Click **Get started**, the Replication Rule will display a window to ask Enable versioning
+- Click *Management Tab*, then scroll down to *Replication rules* section, then click on **Create replication rule**
+![m3-4](../../images/m3-4.png)
 
-![scenario-2-module-1-Picture5](../../images/scenario-2-module-1-Picture5.png)
-pic
+- Enter desired *Replication rule name** in the field,
+- For *Status*: Choose *Enabled*
+- Under **Source bucket**, review your selected Source bucket name (it should show your primary bucket, which was created earlier in Module-1 and source region in Singapore)
+- On *Choose a rule scope*, choose **Apply to all objects in the bucket**
 
-- Click **Enable Versioning**, the Replication rule window goes to Step 1 - Source,  select source as All contents and select Enabled for Status.  Will leave the KMS encryption uncheck in this case.
+![m3-5](../../images/m3-5.png)
 
-![scenario-2-module-1-Picture6](../../images/scenario-2-module-1-Picture6.png)
+Note: **Enable Versioning** on the bucket when asked, leave the KMS encryption uncheck in this case.
 
-- Click Next, Replication rule windows goes to step 2 – Destination.  Click the input box under Destination bucket and a drop-down list will display all the existing buckets in this account.  Select the S3 bucket that was created in eu-west-2
+![m3-6](../../images/m3-6.png)
+
+- Now under **Destination**, specify *Choose a bucket in this account* since we want to utilize existing bucket which is already used for Storage File Gateway service so it can automatically replicate to secondary bucket.
+- In *Bucket name*, choose the bucket that will receive the replicated objects, which is your recently created bucket in the Sydney region from step-1 above.
+- Enable Versioning when asked.
+- Now we want to create new IAM role for the service to allow cross-replicate action. Under *IAM Role*, Choose existing IAM roles, then choose **Create new role** (the GUI contradicts the action we want to do, hopefully this will get fixed in future update).
+
+Replication rule windows goes to step 2 – Destination.  Click the input box under Destination bucket and a drop-down list will display all the existing buckets in this account.  Select the S3 bucket that was created in eu-west-2
+
+![m3-7](../../images/m3-7.png)
+
+- **Replicate existing objects** - You can enable replicate existing objects, by choosing *Yes*. If you want to do it, then you need to do a one-time batch operations job from the replication configuration to replication objects that already exist in the bucket and to synchronize source and destination buckets.
+
+
 
 ![scenario-2-module-1-Picture7](../../images/scenario-2-module-1-Picture4.png)
 
