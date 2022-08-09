@@ -6,7 +6,7 @@ In this module, you will deploy a Linux EC2 instance to simulate on-premises ser
 
 ## Architecture Overview
 
-![scenario 2 diagram 2](../../images/scenario-2-diagram-2.png)
+![scenario 2 diagram 2](../../images/s2-overview.png)
 
 The EC2 instance in eu-west-1 is to simulate the physical server in on-premises data center and will be used in next module to use an on-premises file storage gateway solution.  The EC2 instance use EBS volume as root volume with file data. 
 
