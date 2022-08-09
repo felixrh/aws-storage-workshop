@@ -1,4 +1,4 @@
-# Deploy Linux Instance & configure S3 Storage as Storage Backup Target
+# Deploy Linux Instance & configure S3 as Storage Backup Target
 
 ## Introduction
 
