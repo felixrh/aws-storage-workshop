@@ -22,7 +22,6 @@ You will then deploy a second AWS Storage Gateway in a remote region (eu-west-2)
 
 In this scenario, you will leverage S3, AWS Storage Gateway (volume cached mode), EC2 Windows Instances, Security Groups and Cloud formation (to automate deployment of some components)
 
-[Get started on scenario 1](scenario-1/README.md)
 
 
 ## Scenario 2 – File Gateway
